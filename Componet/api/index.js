@@ -1,27 +1,35 @@
-import _ from "lodash";
-import users from "./users";
+import React, { useEffect, useState } from 'react';
+import { ActivityIndicator, FlatList, Text, View } from 'react-native';
 
-export const contains = ({ name, email }, query) => {
-  const { first, last } = name;
-  if (first.includes(query) || last.includes(query) || email.includes(query)) {
-    return true;
+export default App = () => {
+  const [isLoading, setLoading] = useState(true);
+  const [data, setData] = useState([]);
+
+  const getMovies = async () => {
+     try {
+      const response = await fetch('https://reactnative.dev/movies.json');
+      const json = await response.json();
+      setData(json.movies);
+    } catch (error) {
+      console.error(error);
+    } finally {
+      setLoading(false);
+    }
   }
 
-  return false;
-};
+  useEffect(() => {
+    getMovies();
+  }, []);
 
-export const getUsers = (limit = 20, query = "") => {
-  return new Promise((resolve, reject) => {
-    if (query.length === 0) {
-      resolve(_.take(users, limit));
-    } else {
-      const formattedQuery = query.toLowerCase();
-      const results = _.filter(users, user => {
-        return contains(user, formattedQuery);
-      });
-      resolve(_.take(results, limit));
-    }
-  });
-};
-
-export default getUsers;
+  return (
+    <View style={{ flex: 1, padding: 24 }}>
+      {isLoading ? <ActivityIndicator/> : (
+        <FlatList
+          data={data}
+          keyExtractor={({ id }, index) => id}
+          renderItem={({ item }) => (
+            <Text>{item.title}, {item.releaseYear}</Text>
+          )}
+        />
+      )}
+    </View>

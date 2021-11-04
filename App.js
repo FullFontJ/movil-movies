@@ -9,6 +9,14 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import ListMovies from './Componet/ListMovies';
 import Searapp from './Componet/SearchMovie';
 
+function DetailsScreen() {
+  return (
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <Text>Details Screen</Text>
+    </View>
+  );
+}
+
 function HomeScreen({ navigation }) {
   return (
       <ListMovies ></ListMovies> 
@@ -54,18 +62,11 @@ function MyTabs() {
       }}
       />
 
-<Stack.Screen name="Details" component={DetailsScreen} />
 
     </Tab.Navigator>
   );
 }
-function DetailsScreen() {
-  return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Text>Details Screen</Text>
-    </View>
-  );
-}
+
 
 
 
@@ -73,9 +74,6 @@ export default function App() {
   return (
     <NavigationContainer>
       <MyTabs />
-      {/* <Stack.Navigator >
-      <Stack.Screen name="Details" component={DetailsScreen} />
-    </Stack.Navigator> */}
     </NavigationContainer>
   );
 }

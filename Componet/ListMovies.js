@@ -12,10 +12,10 @@ import {
 } from 'react-native';
 
 
-const ListItem = ({ navigation, item }) => {
+const ListItem = ({ item }) => {
   return (
     <View style={styles.item}>
-      <TouchableHighlight onPress={() => navigation.navigate('Details')}>
+      {/* <TouchableHighlight onPress={() => navigation.navigate('Details')}> */}
       <Image
         source={{
           uri: item.uri,
@@ -24,13 +24,13 @@ const ListItem = ({ navigation, item }) => {
         resizeMode="cover"
       />
       <Text style={styles.itemText}>{item.text}</Text>
-      </TouchableHighlight>
+      {/* </TouchableHighlight> */}
     </View>
   );
 };
 
 
-export default ({ navigation }) => {
+export default () => {
   return (
     <View style={styles.container}>
       <StatusBar style="light" />
@@ -42,20 +42,20 @@ export default ({ navigation }) => {
           renderSectionHeader={({ section }) => (
             <>
               <Text style={styles.sectionHeader}>{section.title}</Text>
-              {section.horizontal ? (
+              
+              
                 <FlatList
                   horizontal
                   data={section.data}
-                  renderItem={({ item }) => <ListItem item={navigation, item} />}
+                  renderItem={({ item }) => <ListItem item={ item} />}
                   showsHorizontalScrollIndicator={false}
                 />
-              ) : null}
+                
             </>
           )}
           renderItem={({ item, section }) => {
-            if (section.horizontal) {
               return null;
-            }
+            
             return <ListItem item={item} />;
           }}
         />
@@ -66,7 +66,7 @@ export default ({ navigation }) => {
 
 const SECTIONS = [
   {
-    title: 'Made for you',
+    title: 'Accion',
     horizontal: true,
     data: [
       {
@@ -98,7 +98,8 @@ const SECTIONS = [
     ],
   },
   {
-    title: 'Punk and hardcore',
+    title: 'Roamance',
+    horizontal: true,
     data: [
       {
         key: '1',
@@ -129,7 +130,8 @@ const SECTIONS = [
     ],
   },
   {
-    title: 'Based on your recent listening',
+    title: 'Comendia',
+    horizontal: true,
     data: [
       {
         key: '1',
