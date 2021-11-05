@@ -38,7 +38,9 @@ function MyTabs() {
       initialRouteName="Inicio"
       screenOptions={{
         headerShown: false,
-        
+        tabBarActiveBackgroundColor: "#34495E",
+        tabBarInactiveBackgroundColor: "#0C0201",
+        tabBarActiveTintColor: "#F2F3F4",
       }}
     >
 
